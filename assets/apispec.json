@@ -1,0 +1,923 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.1.0",
+    "title": "Test API",
+    "description": "Test API",
+    "tos": "NA",
+    "contact": {
+      "name": "Team"
+    }
+  },
+  "schemes": [
+    "http"
+  ],
+  "host": "localhost:8040",
+  "basePath": "/",
+  "paths": {
+    "/{env}/rest/test.v1": {
+      "post": {
+        "tags": [
+          "M"
+        ],
+        "summary": "Test Staging",
+        "description": "",
+        "operationId": "eMember",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/envParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/eMember"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/{env}/RM": {
+      "get": {
+        "tags": [
+          "M"
+        ],
+        "summary": "RM DB",
+        "description": "RM from DB",
+        "operationId": "getRM",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/envParam"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "type": "string",
+            "description": "Status Code"
+          },
+          {
+            "name": "nodocs",
+            "in": "query",
+            "type": "boolean",
+            "default": false,
+            "description": "TRUE if should have documents"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DBM"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/{env}/NRM": {
+      "get": {
+        "tags": [
+          "M"
+        ],
+        "summary": "NRM from DB",
+        "description": "Get NRM from DB",
+        "operationId": "getNRM",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/envParam"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "type": "string",
+            "description": "Status Code"
+          },
+          {
+            "name": "nodocs",
+            "in": "query",
+            "type": "boolean",
+            "default": false,
+            "description": "TRUE if should have documents"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DBM"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/{env}/DD": {
+      "get": {
+        "tags": [
+          "d"
+        ],
+        "summary": "Get dd",
+        "description": "Get dd",
+        "operationId": "DD",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/envParam"
+          },
+          {
+            "name": "eno",
+            "in": "query",
+            "type": "string",
+            "description": "Atleast 1 required"
+          },
+          {
+            "name": "tid",
+            "in": "query",
+            "type": "string",
+            "description": "Atleast 1 required"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DE"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/{env}/D/{tid}": {
+      "get": {
+        "tags": [
+          "D"
+        ],
+        "summary": "Get dd",
+        "description": "Get dd",
+        "operationId": "D",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/envParam"
+          },
+          {
+            "name": "tid",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "description": "Document id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/D"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/{env}/member/bd/{entityNo}": {
+      "get": {
+        "tags": [
+          "BD"
+        ],
+        "summary": "Get BD",
+        "description": "Get BD",
+        "operationId": "db",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/envParam"
+          },
+          {
+            "name": "eno",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "description": "Number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BD"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/{env}/WaitForXpathToExist": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Wait for XPath to exist",
+        "description": "",
+        "operationId": "waitForXpathToExist",
+        "consumes": [
+          "application/xml"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Actual XML to send to URL, Ignore Example",
+            "schema": {
+              "$ref": "#/definitions/requestXML"
+            },
+            "required": true
+          },
+          {
+            "name": "xpath",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "XPath to Check For"
+          },
+          {
+            "$ref": "#/parameters/envParam"
+          },
+          {
+            "name": "url",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "URL to hit"
+          },
+          {
+            "name": "repeat",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "default": 5,
+            "description": "Number of times to repeat"
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "default": 2000,
+            "description": "Milliseconds to wait between each attempt"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/{env}/WaitForJSONpathToExist": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Wait for XPath to exist",
+        "description": "",
+        "operationId": "waitForJSONpathToExist",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Actual JSON to send to URL, Ignore Example",
+            "schema": {
+              "$ref": "#/definitions/requestJSON"
+            }
+          },
+          {
+            "name": "jsonpath",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "XPath to Check For"
+          },
+          {
+            "$ref": "#/parameters/envParam"
+          },
+          {
+            "name": "url",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "URL to hit"
+          },
+          {
+            "name": "repeat",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "default": 5,
+            "description": "Number of times to repeat"
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "default": 2000,
+            "description": "Milliseconds to wait between each attempt"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/{env}/Wait/{seconds}": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Wait for given time",
+        "description": "Wait for given time",
+        "operationId": "wait",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/envParam"
+          },
+          {
+            "name": "seconds",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "description": "Seconds to wait"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/{env}/rest/sleep": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Wait for given time",
+        "description": "Wait for given time",
+        "operationId": "waitRest",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/envParam"
+          },
+          {
+            "name": "seconds",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "Seconds to wait"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/webapi/Personal/PT": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Mock PT",
+        "description": "Last 3 digits correspond to test case",
+        "operationId": "vPT",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "eNumber",
+            "in": "query",
+            "type": "string",
+            "description": "Number"
+          },
+          {
+            "name": "tId",
+            "in": "query",
+            "type": "string",
+            "default": 7,
+            "required": true
+          },
+          {
+            "name": "mode",
+            "in": "query",
+            "type": "string",
+            "default": "list",
+            "required": true
+          },
+          {
+            "name": "per",
+            "in": "query",
+            "type": "string",
+            "default": 0,
+            "required": true
+          },
+          {
+            "name": "testid",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/{env}/rest/nba": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Mock NBA",
+        "description": "Mock NBA",
+        "operationId": "nba",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/envParam"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "Schema Details",
+            "schema": {
+              "$ref": "#/definitions/NBA"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "envParam": {
+      "name": "env",
+      "in": "path",
+      "type": "string",
+      "description": "Environment",
+      "required": true,
+      "default": "DEV",
+      "enum": [
+        "DEV",
+        "TEST",
+        "SIT"
+      ]
+    }
+  },
+  "definitions": {
+    "requestXML": {
+      "type": "string",
+      "description": "XML Request to send"
+    },
+    "requestJSON": {
+      "type": "string",
+      "description": "JSON Request to send"
+    },
+    "details": {
+      "type": "object",
+      "properties": {
+        "testId": {
+          "type": "string"
+        },
+        "eNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "NBA": {
+      "type": "object",
+      "properties": {
+        "eNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "eMember": {
+      "type": "object",
+      "properties": {
+        "member": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "gender": {
+              "type": "string"
+            },
+            "dateOfBirth": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "address": {
+              "type": "object",
+              "properties": {
+                "line1": {
+                  "type": "string"
+                },
+                "suburb": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "postcode": {
+                  "type": "string"
+                }
+              }
+            },
+            "phone": {
+              "type": "object",
+              "properties": {
+                "mobileNumber": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "homeNumber": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "workNumber": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          }
+        },
+        "tnc": {
+          "type": "string"
+        },
+        "rname": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        }
+      }
+    },
+    "DB": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "UPDATEDDATE": {
+          "type": "string"
+        },
+        "P_ID": {
+          "type": "string"
+        },
+        "S_ID": {
+          "type": "string"
+        },
+        "VNO": {
+          "type": "string"
+        },
+        "DNO": {
+          "type": "string"
+        },
+        "DPNO": {
+          "type": "string"
+        },
+        "RJ": {
+          "type": "string"
+        },
+        "FR": {
+          "type": "string"
+        },
+        "NNO": {
+          "type": "string"
+        },
+        "CDATE": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "EDATE": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ENDATE": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ACTDATE": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "TEDATE": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "PENDATE": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "V": {
+          "type": "string"
+        },
+        "R_ID": {
+          "type": "string"
+        },
+        "PA_ID": {
+          "type": "string"
+        },
+        "EMAIL": {
+          "type": "string"
+        },
+        "CNO": {
+          "type": "string"
+        },
+        "OOUTP": {
+          "type": "string"
+        },
+        "OOUTS": {
+          "type": "string"
+        },
+        "IDX": {
+          "type": "string"
+        }
+      }
+    },
+    "DEXT": {
+      "type": "object",
+      "properties": {
+        "VNO": {
+          "type": "string"
+        },
+        "DNO": {
+          "type": "string"
+        },
+        "DPNO": {
+          "type": "string"
+        },
+        "NNO": {
+          "type": "string"
+        },
+        "EATE": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "P_ID": {
+          "type": "string"
+        },
+        "CTNO": {
+          "type": "string"
+        },
+        "EM": {
+          "type": "string"
+        },
+        "ID": {
+          "type": "string"
+        },
+        "D_NAME": {
+          "type": "string"
+        },
+        "E_DATE": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "UDATE": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "V": {
+          "type": "string"
+        },
+        "STATUS": {
+          "type": "string"
+        },
+        "DR_DATE": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "DDESC": {
+          "type": "string"
+        },
+        "SRC": {
+          "type": "string"
+        },
+        "DTID": {
+          "type": "string"
+        },
+        "ATC": {
+          "type": "string"
+        },
+        "ATN": {
+          "type": "string"
+        },
+        "ATD": {
+          "type": "string"
+        }
+      }
+    },
+    "D": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "DNAME": {
+          "type": "string"
+        },
+        "E_DATE": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "UDATE": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "V": {
+          "type": "string"
+        },
+        "S": {
+          "type": "string"
+        },
+        "DR_DATE": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "DD": {
+          "type": "string"
+        },
+        "SR": {
+          "type": "string"
+        },
+        "DTID": {
+          "type": "string"
+        }
+      }
+    },
+    "BD": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "BN": {
+          "type": "string"
+        },
+        "UDATE": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "V": {
+          "type": "string"
+        },
+        "BNA": {
+          "type": "string"
+        },
+        "AN": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ANO": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
