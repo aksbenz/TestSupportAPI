@@ -2,7 +2,6 @@ var Promise = require('promise');
 var _ = require('lodash');
 var db = require('./db.js');
 var api = require('./api.js');
-var file = require('./casetrack.js');
 
 exports.default = function(args){
   return new Promise(function(fulfill, reject) {
