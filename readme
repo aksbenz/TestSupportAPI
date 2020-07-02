@@ -1,5 +1,0 @@
-Test Support
-Expose test support operations as Rest API
-Can be then used in Postman
-
-API Spec defined via Swagger Spec: assets/apispec.json
